@@ -1,56 +1,20 @@
-import {
-  getAverageValue,
-  getFailingGrades,
-  getNumberOfGrades,
-  getPassingGrades,
-  getRaisedGrades,
-  getSumGrades,
-} from './classroom.js';
+import { getVotersCount } from './stats.js';
+const city = document.querySelector('#city-select');
+const count = document.querySelector('#count');
+const cityName = document.querySelector('#city-name');
 
-const gradesForm = document.querySelector('#grades-form');
-const yourGrade = document.querySelector('#your-grade');
+city.addEventListener('change', () => {
+  if (!city.value) {
+    return false;
+  }
 
-const grades = [12, 19, 10, 4, 15, 9];
-
-/**
- * @param {number[]} grades
- */
-const renderStats2Table = grades => {
-  const tbody = document.querySelector('#stats-table2 tbody');
-  tbody.innerHTML = `<tr>
-    <td>${getPassingGrades(grades)}</td>
-    <td>${getFailingGrades(grades)}</td>
-    <td>${getRaisedGrades(grades)}</td>
-  </tr>`;
-};
-
-/**
- * @param {number[]} grades
- */
-const renderStatsTable = grades => {
-  const tbody = document.querySelector('#stats-table tbody');
-  tbody.innerHTML = `<tr>
-    <td>${getNumberOfGrades(grades)}</td>
-    <td>${getSumGrades(grades)}</td>
-    <td>${getAverageValue(grades)}</td>
-  </tr>`;
-};
-
-/**
- * @param {number[]} grades
- */
-const render = grades => {
-  console.log('Grades: ' + grades.join(', '));
-  renderStatsTable(grades);
-  renderStats2Table(grades);
-};
-
-gradesForm.addEventListener('submit', event => {
-  event.preventDefault();
-  const newGrade = Number.parseInt(yourGrade.value, 10);
-  grades.push(newGrade);
-  yourGrade.value = ``;
-  render(grades);
+  fetch(
+    `https://jsdemo-3f387-default-rtdb.europe-west1.firebasedatabase.app/city-stats/${city.value}.json`
+  )
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      cityName.textContent = city.options[city.selectedIndex].textContent;
+      count.textContent = getVotersCount(data);
+    });
 });
-
-render(grades);
