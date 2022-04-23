@@ -2,5 +2,8 @@
  * @param {string} age
  */
 export function getNextAge(age) {
-  return Number.parseInt(age, 10) + 1;
+  const nextAge = Number.parseInt(age, 10) + 1;
+  if (!nextAge) return 0;
+
+  return nextAge;
 }
