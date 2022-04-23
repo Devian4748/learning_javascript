@@ -12,10 +12,7 @@ export function getNumberOfGrades(grades) {
 export function getSumGrades(grades) {
   // return the sum of all the grades
   let sum = 0;
-  grades.forEach(function (grade) {
-    sum += grade;
-  });
-
+  grades.forEach(grade => (sum += grade));
   return sum;
 }
 
@@ -33,9 +30,7 @@ export function getAverageValue(grades) {
  */
 export function getPassingGrades(grades) {
   // return all passing grades (10 and above)
-  return grades.filter(function (grade) {
-    return grade >= 10;
-  });
+  return grades.filter(grade => grade >= 10);
 }
 
 /**
@@ -43,9 +38,7 @@ export function getPassingGrades(grades) {
  */
 export function getFailingGrades(grades) {
   // return all failing grades (9 and below)
-  return grades.filter(function (grade) {
-    return grade < 10;
-  });
+  return grades.filter(grade => grade < 10);
 }
 
 /**
@@ -54,9 +47,9 @@ export function getFailingGrades(grades) {
 export function getRaisedGrades(grades) {
   // return all the grades raised by 1 (no grade should exceed 20)
 
-  return grades.map(function (grade) {
+  const maxGrade = 20;
+  return grades.map(grade => {
     const raisedGrade = grade + 1;
-    const maxGrade = 20;
     return raisedGrade > maxGrade ? maxGrade : raisedGrade;
   });
 }
