@@ -1,10 +1,8 @@
-import { renderTableRow } from './nutrition.js';
+import { getDescription } from './helpers.js';
 
-let htmlForCarbs = renderTableRow('Carbs', '17g');
-let htmlForProtein = renderTableRow('Protein', '19g');
-let htmlForFat = renderTableRow('Fat', '5g');
+const input = document.querySelector('#input');
+const output = document.querySelector('#output');
 
-const tbody = document.querySelector('#nutrition-table tbody');
-tbody.insertAdjacentHTML('beforeend', htmlForCarbs);
-tbody.insertAdjacentHTML('beforeend', htmlForProtein);
-tbody.insertAdjacentHTML('beforeend', htmlForFat);
+input.addEventListener('input', event => {
+  output.textContent = getDescription(event.currentTarget.value);
+});
