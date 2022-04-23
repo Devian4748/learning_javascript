@@ -1,14 +1,16 @@
-import { renderTableRow } from './nutrition.js';
+import { getCountry, getTemperature, getIcon } from './weather.js';
 
-const carbs = { title: 'Carbs', value: 17 };
-const protein = { title: 'Protein', value: 19 };
-const fat = { title: 'Fat', value: 5 };
+const icon = document.querySelector('#icon');
+const temperature = document.querySelector('#temperature');
+const country = document.querySelector('#country');
 
-let html = '';
-
-html += renderTableRow(carbs);
-html += renderTableRow(protein);
-html += renderTableRow(fat);
-
-const tbody = document.querySelector('#nutrition-table tbody');
-tbody.insertAdjacentHTML('beforeend', html);
+fetch(
+  `https://learn-javascript-demo-default-rtdb.firebaseio.com/weather/amsterdam.json`
+)
+  .then(response => response.json())
+  .then(data => {
+    icon.src = getIcon(data);
+    temperature.textContent = getTemperature(data);
+    country.textContent - getCountry(data);
+  })
+  .catch(error => console.log(error));
