@@ -1,11 +1,10 @@
 /**
- * @param {string} label
- * @param {string} value
+ * @param {Object} details
+ * @param {string} details.title
+ * @param {number} details.value
  */
-export function renderTableRow(label, value) {
-  console.log(label, value);
-
-  return `<tr><td>${label}</td><td>${value}</td></tr>`;
+export function renderTableRow(details) {
+  return `<tr><td>${details.title}</td><td>${details.value}g</td></tr>`;
 }
 
 /**
