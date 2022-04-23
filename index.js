@@ -1,8 +1,8 @@
-import { evenOrOdd } from './numbers.js';
+import { getDropdown } from './countries.js';
 
-const number = document.querySelector('#your-number');
-const output = document.querySelector('#output');
+const countries = ['Netherlands', 'Japan', 'Mongolia'];
 
-number.addEventListener('keyup', () => {
-  output.textContent = evenOrOdd(number.value);
-});
+const html = getDropdown(countries);
+
+const select = document.querySelector('#countries-dropdown');
+select.innerHTML = html;
