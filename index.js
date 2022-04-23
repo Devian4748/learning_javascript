@@ -1,8 +1,8 @@
-import { getDescription } from './helpers.js';
+import { getNextAge } from './age.js';
 
-const input = document.querySelector('#input');
-const output = document.querySelector('#output');
+const age = document.querySelector('#your-age');
+const nextAge = document.querySelector('#next-age');
 
-input.addEventListener('input', event => {
-  output.textContent = getDescription(event.currentTarget.value);
+age.addEventListener('keyup', () => {
+  nextAge.textContent = getNextAge(age.value);
 });
