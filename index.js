@@ -1,8 +1,8 @@
-import { getDropdown } from './countries.js';
+import { getTranslation } from './helpers.js';
 
-const countries = ['Netherlands', 'Japan', 'Mongolia'];
+const dropdown = document.querySelector('#countries');
+const output = document.querySelector('#output');
 
-const html = getDropdown(countries);
-
-const select = document.querySelector('#countries-dropdown');
-select.innerHTML = html;
+dropdown.addEventListener('change', () => {
+  output.textContent = getTranslation(dropdown.value);
+});
