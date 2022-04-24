@@ -1,14 +1,11 @@
-import { renderTableRow } from './nutrition.js';
+import { renderTableRow, renderTableRows } from './nutrition.js';
 
-const carbs = { title: 'Carbs', value: 17 };
-const protein = { title: 'Protein', value: 19 };
-const fat = { title: 'Fat', value: 5 };
-
-let html = '';
-
-html += renderTableRow(carbs);
-html += renderTableRow(protein);
-html += renderTableRow(fat);
+const data = [
+  ['Carbs', '17g'],
+  ['Protein', '19g'],
+  ['Fat', '5g'],
+];
+let html = renderTableRows(data);
 
 const tbody = document.querySelector('#nutrition-table tbody');
 tbody.insertAdjacentHTML('beforeend', html);
