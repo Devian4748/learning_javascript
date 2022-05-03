@@ -1,8 +1,55 @@
-import { getTranslation } from './helpers.js';
+import Todos from './todos.js';
 
-const dropdown = document.querySelector('#countries');
-const output = document.querySelector('#output');
+const form = document.querySelector('#todo-form');
+const title = document.querySelector('#todo-title');
+const category = document.querySelector('#todo-category');
+const list = document.querySelector('#todo-list');
+const filter = document.querySelector('#todo-filter');
+const count = document.querySelector('#todo-count');
 
-dropdown.addEventListener('change', () => {
-  output.textContent = getTranslation(dropdown.value);
+/**
+ *
+ * @param {Object[]} items
+ * @param {number} itemsCount
+ */
+const render = (items, itemsCount) => {
+  count.textContent = `(${itemsCount})`;
+  list.innerHTML = items
+    .map(todo => `<li>${todo.title} [${todo.category}]</li>`)
+    .join('');
+};
+
+const todos = new Todos();
+
+try {
+  render(todos.getAll(), todos.getCount());
+} catch (error) {
+  console.error(error);
+}
+
+form.addEventListener('submit', event => {
+  event.preventDefault();
+
+  try {
+    todos.add(title.value, category.value);
+    render(todos.getAll(), todos.getCount());
+  } catch (error) {
+    console.error(error);
+  }
+
+  title.value = '';
+});
+
+filter.addEventListener('change', () => {
+  try {
+    if (filter.value === 'work') {
+      render(todos.getWork(), todos.getWorkCount());
+    } else if (filter.value === 'personal') {
+      render(todos.getPersonal(), todos.getPersonalCount());
+    } else {
+      render(todos.getAll(), todos.getCount());
+    }
+  } catch (error) {
+    console.error(error);
+  }
 });
