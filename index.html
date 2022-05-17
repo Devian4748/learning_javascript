@@ -4,48 +4,29 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ToDos</title>
+    <title>Gem run game</title>
   </head>
   <body>
     <nav id="navbar">
-      <a href="#" class="nav-brand">App</a>
+      <a href="#" class="nav-brand">Gem run game</a>
       <ul>
-        <li class="nav-item"><a href="#">About us</a></li>
-        <li class="nav-item btn btn-default"><a href="#">Register</a></li>
+        <li class="nav-item nav-stats">Score <span id="show-case"></span></li>
       </ul>
     </nav>
     <div class="container" id="main">
-      <h1>Welcome to our app</h1>
-      <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Neque ad quo
-        laudantium nostrum qui dolorum! Sed beatae architecto facilis id ratione
-        voluptas esse sit ducimus veniam quibusdam odio, soluta hic!
-      </p>
-      <form id="todo-form">
-        <label for="todo-title">Todo</label>
-        <input id="todo-title" type="text" placeholder="Enter your todo" />
-        <select id="todo-category">
-          <option value="work">Work</option>
-          <option value="personal">Personal</option>
-        </select>
-        <input type="submit" class="btn btn-outline" value="Add" />
-      </form>
-      <hr class="separator" />
       <div>
-        <label> Filter: </label>
-        <select id="todo-filter">
-          <option value="">Show all</option>
-          <option value="work">Work only</option>
-          <option value="personal">Personal only</option>
-        </select>
-        <h3>Todos <span id="todo-count"></span></h3>
-        <ul id="todo-list"></ul>
+        <h2>Collect coins</h2>
+        <p class="collection-description">Every coin is worth a score of 10</p>
+        <button id="collect-coin" class="btn btn-default">Collect coin</button>
+        <p id="coins-collected" class="collection-stat">0 coins collected</p>
+      </div>
+      <div>
+        <h2>Collect gems</h2>
+        <p class="collection-description">Every gem is worth a score of 50</p>
+        <button id="collect-gem" class="btn btn-outline">Collect gem</button>
+        <p id="gems-collected" class="collection-stat">0 gems collected</p>
       </div>
     </div>
-    <footer id="footer-wrapper">
-      <a href="#" target="_blank">About us</a>
-      <a href="#" target="_blank">Contact us</a>
-    </footer>
     <script src="./index.js" type="module"></script>
   </body>
 </html>

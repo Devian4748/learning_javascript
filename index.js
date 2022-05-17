@@ -1,55 +1,40 @@
-import Todos from './todos.js';
+import GameScore from './game-score.js';
 
-const form = document.querySelector('#todo-form');
-const title = document.querySelector('#todo-title');
-const category = document.querySelector('#todo-category');
-const list = document.querySelector('#todo-list');
-const filter = document.querySelector('#todo-filter');
-const count = document.querySelector('#todo-count');
+import { Collectible, Coin, Gem } from './collectibles.js';
 
-/**
- *
- * @param {Object[]} items
- * @param {number} itemsCount
- */
-const render = (items, itemsCount) => {
-  count.textContent = `(${itemsCount})`;
-  list.innerHTML = items
-    .map(todo => `<li>${todo.title} [${todo.category}]</li>`)
-    .join('');
-};
-
-const todos = new Todos();
+const coin = new Coin();
+const gem = new Gem();
+const gameScore = new GameScore();
 
 try {
-  render(todos.getAll(), todos.getCount());
+  gameScore.addCollectible(coin);
+  gameScore.addCollectible(gem);
 } catch (error) {
-  console.error(error);
+  console.log(error);
 }
 
-form.addEventListener('submit', event => {
-  event.preventDefault();
+const collectCoin = document.querySelector('#collect-coin');
+const collectGem = document.querySelector('#collect-gem');
+const coinsCollected = document.querySelector('#coins-collected');
+const gemsCollected = document.querySelector('#gems-collected');
+const showScore = document.querySelector('#show-case');
 
+const render = () => {
   try {
-    todos.add(title.value, category.value);
-    render(todos.getAll(), todos.getCount());
+    coinsCollected.textContent = coin.getCollectedMessage();
+    gemsCollected.textContent = gem.getCollectedMessage();
+    showScore.textContent = gameScore.getTotalScore();
   } catch (error) {
-    console.error(error);
+    console.log(error);
   }
+};
 
-  title.value = '';
+collectCoin.addEventListener('click', () => {
+  coin.collect();
+  render();
 });
 
-filter.addEventListener('change', () => {
-  try {
-    if (filter.value === 'work') {
-      render(todos.getWork(), todos.getWorkCount());
-    } else if (filter.value === 'personal') {
-      render(todos.getPersonal(), todos.getPersonalCount());
-    } else {
-      render(todos.getAll(), todos.getCount());
-    }
-  } catch (error) {
-    console.error(error);
-  }
+collectGem.addEventListener('click', () => {
+  gem.collect();
+  render();
 });
